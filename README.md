@@ -12,19 +12,13 @@ Samples
 include postfix
 ```
 ```
+postfix::aliases {
+  'root': value => [ 'admin@domain.com' ]
+}
+```
+```
 postfix::config {
   'relayhost': value => 'mail.domain.com';
-}
-```
-```
-postfix::aliases { 'default':
-  root_aliases => [ 'admin@domain.com' ]
-}
-```
-```
-postfix::service { 'default':
-  ensure => running,
-  enable => true
 }
 ```
 
