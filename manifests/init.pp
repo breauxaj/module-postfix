@@ -30,7 +30,7 @@ class postfix (
   $ensure = $::postfix::params::postfix_package_ensure
 ) inherits ::postfix::params {
   case $::operatingsystem {
-    'CentOS', 'Debian', 'OracleLinux', 'RedHat': {
+    'CentOS', 'Debian', 'OracleLinux', 'RedHat', 'Scientific': {
       package { $::postfix::params::postfix_package:
         ensure  => $ensure,
       }

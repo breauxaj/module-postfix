@@ -9,7 +9,7 @@ class postfix::params {
   $postfix_package_ensure = 'latest'
 
   case $::operatingsystem {
-    'CentOS', 'Debian', 'OracleLinux', 'RedHat': {
+    'CentOS', 'Debian', 'OracleLinux', 'RedHat', 'Scientific': {
       $postfix_context = '/files/etc/postfix/main.cf'
       $postfix_package = 'postfix'
       $postfix_service = 'postfix'
