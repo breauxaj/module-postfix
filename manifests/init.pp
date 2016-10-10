@@ -46,6 +46,12 @@ class postfix (
         enable  => true,
         require => Package[$::postfix::params::postfix_package],
       }
+
+      service { 'sendmail':
+        ensure  => stopped,
+        enable  => false,
+        require => Package[$::postfix::params::postfix_package],
+      }
     }
     default: {
       fail("The ${module_name} module is not supported on an ${::osfamily} based system.")
