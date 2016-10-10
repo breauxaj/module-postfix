@@ -9,7 +9,7 @@ define postfix::config (
     context => $::postfix::params::postfix_context,
     onlyif  => "get ${key} != '${value}'",
     changes => "set ${key} '${value}'",
-    notify  => Exec['sysctl'],
+    notify  => Service[$::postfix::params::postfix_service],
   }
 
 }
