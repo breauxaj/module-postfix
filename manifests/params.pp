@@ -14,6 +14,11 @@ class postfix::params {
       $postfix_package = 'postfix'
       $postfix_service = 'postfix'
     }
+    'Debian': {
+      $postfix_context = '/files/etc/postfix/main.cf'
+      $postfix_package = 'postfix'
+      $postfix_service = 'postfix'
+    }
     default: {
       fail("The ${module_name} module is not supported on an ${::osfamily} based system.")
     }

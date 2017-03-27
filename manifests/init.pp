@@ -29,32 +29,26 @@
 class postfix (
   $ensure = $::postfix::params::postfix_package_ensure
 ) inherits ::postfix::params {
-  case $::osfamily {
-    'RedHat': {
-      package { $::postfix::params::postfix_package:
-        ensure  => $ensure,
-      }
-
-      $postfix_aliases = hiera('postfix::aliases',{})
-      create_resources('postfix::aliases',$postfix_aliases)
-
-      $postfix_config = hiera('postfix',{})
-      create_resources('postfix::config',$postfix_config)
-
-      service { $::postfix::params::postfix_service:
-        ensure  => running,
-        enable  => true,
-        require => Package[$::postfix::params::postfix_package],
-      }
-
-      service { 'sendmail':
-        ensure  => stopped,
-        enable  => false,
-        require => Package[$::postfix::params::postfix_package],
-      }
-    }
-    default: {
-      fail("The ${module_name} module is not supported on an ${::osfamily} based system.")
-    }
+  package { $::postfix::params::postfix_package:
+    ensure  => $ensure,
   }
+
+  $postfix_aliases = hiera('postfix::aliases',{})
+  create_resources('postfix::aliases',$postfix_aliases)
+
+  $postfix_config = hiera('postfix',{})
+  create_resources('postfix::config',$postfix_config)
+
+  service { $::postfix::params::postfix_service:
+    ensure  => running,
+    enable  => true,
+    require => Package[$::postfix::params::postfix_package],
+  }
+
+  service { 'sendmail':
+    ensure  => stopped,
+    enable  => false,
+    require => Package[$::postfix::params::postfix_package],
+  }
+
 }
