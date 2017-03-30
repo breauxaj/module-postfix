@@ -1,0 +1,5 @@
+postfix:
+  myorigin:   
+    value: 'domain.com'
+  relayhost: 
+    value: 'relay.domain.com'
