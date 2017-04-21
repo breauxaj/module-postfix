@@ -9,18 +9,22 @@ class postfix::params {
   $postfix_package_ensure = 'latest'
 
   case $::osfamily {
-    'RedHat': {
-      $postfix_context = '/files/etc/postfix/main.cf'
-      $postfix_package = 'postfix'
-      $postfix_service = 'postfix'
-    }
-    'Debian': {
-      $postfix_context = '/files/etc/postfix/main.cf'
-      $postfix_package = 'postfix'
-      $postfix_service = 'postfix'
+    'Debian', 'RedHat': {
+      case $::operatingsystem {
+        default: {
+          case $::operatingsystemmajrelease {
+            default: {
+              $postfix_context = '/files/etc/postfix/main.cf'
+              $postfix_package = 'postfix'
+              $postfix_service = 'postfix'
+            }
+          }
+        }
+      }
     }
     default: {
       fail("The ${module_name} module is not supported on an ${::osfamily} based system.")
     }
   }
+
 }
