@@ -39,6 +39,9 @@ class postfix (
   $postfix_config = hiera('postfix',{})
   create_resources('postfix::config',$postfix_config)
 
+  $postfix_generic = hiera('postfix::generic',{})
+  create_resources('postfix::generic',$postfix_generic)
+
   service { $::postfix::params::postfix_service:
     ensure  => running,
     enable  => true,

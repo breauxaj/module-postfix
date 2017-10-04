@@ -15,6 +15,7 @@ class postfix::params {
           case $::operatingsystemmajrelease {
             default: {
               $postfix_context = '/files/etc/postfix/main.cf'
+              $postfix_generic = '/etc/postfix/generic'
               $postfix_package = 'postfix'
               $postfix_service = 'postfix'
             }
